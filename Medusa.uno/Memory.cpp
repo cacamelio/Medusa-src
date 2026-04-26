@@ -80,8 +80,10 @@ std::uintptr_t Memory::findPattern(const char* moduleName, std::string_view patt
 
 Memory::Memory() noexcept
 {
-    present = findPattern(skCrypt("gameoverlayrenderer").decrypt(), skCrypt("\xFF\x15????\x8B\xF0\x85\xFF").decrypt()) + 2;
-    reset = findPattern(skCrypt("gameoverlayrenderer").decrypt(), skCrypt("\xC7\x45?????\xFF\x15????\x8B\xD8").decrypt()) + 9;
+    /*present = findPattern(skCrypt("gameoverlayrenderer").decrypt(), skCrypt("\xFF\x15????\x8B\xF0\x85\xFF").decrypt()) + 2;
+    reset = findPattern(skCrypt("gameoverlayrenderer").decrypt(), skCrypt("\xC7\x45?????\xFF\x15????\x8B\xD8").decrypt()) + 9;*/
+
+    device = **reinterpret_cast<void****>(findPattern(skCrypt("shaderapidx9").decrypt(), skCrypt("\xA1????\x50\x8B\x08\xFF\x51\x0C").decrypt()) + 1);
 
     clientMode = **reinterpret_cast<ClientMode***>((*reinterpret_cast<uintptr_t**>(interfaces->client))[10] + 5);
     input = *reinterpret_cast<Input**>((*reinterpret_cast<uintptr_t**>(interfaces->client))[16] + 1);

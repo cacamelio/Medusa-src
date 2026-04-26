@@ -43,8 +43,10 @@ public:
     static std::uintptr_t findPattern(const char* moduleName, std::string_view pattern, bool reportNotFound) noexcept;
     Memory() noexcept;
 
-    std::uintptr_t present;
-    std::uintptr_t reset;
+    /*std::uintptr_t present;
+    std::uintptr_t reset;*/
+
+    void* device;
 
     ClientMode* clientMode;
     Input* input;
